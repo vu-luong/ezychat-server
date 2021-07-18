@@ -69,6 +69,11 @@
 			<config-file>chat-tutorial-zone-settings.xml</config-file>
 			<active>true</active>
 		</zone>
+	    <zone>
+	        <name>lucky-wheel</name>
+	        <config-file>lucky-wheel-zone-settings.xml</config-file>
+	        <active>true</active>
+	    </zone>
 	</zones>
 	
 </settings>

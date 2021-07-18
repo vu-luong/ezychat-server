@@ -1,0 +1,1085 @@
+16 Jul 2021 | 17:36:27,820 | INFO  | main | ezyfoxserver.setting.EzySimpleSettingsReader |     | read setting file: settings/ezy-settings.xml
+16 Jul 2021 | 17:36:28,409 | INFO  | main | tvd12.ezyfoxserver.EzyStarter$1 |     | load: apps/entries/hello-world-entry
+16 Jul 2021 | 17:36:28,412 | INFO  | main | tvd12.ezyfoxserver.EzyStarter$1 |     | load: apps/entries/chat-tutorial-app-entry
+16 Jul 2021 | 17:36:28,498 | INFO  | main | ezyfoxserver.nio.EzyNioStarter |     | settings: 
+{
+    "settings": {
+        "nodeName": "localhost",
+        "udp": {
+            "channelPoolSize": 16,
+            "codecCreator": "com.tvd12.ezyfox.codec.MsgPackCodecCreator",
+            "address": "0.0.0.0",
+            "maxRequestSize": 1024,
+            "port": 2611,
+            "active": true,
+            "handlerThreadPoolSize": 5
+        },
+        "debug": false,
+        "maxSessions": 999999,
+        "sessionManagement": {
+            "sessionMaxRequestPerSecond": {
+                "action": "DISCONNECT_SESSION",
+                "value": 300
+            },
+            "sessionMaxIdleTime": 150000,
+            "sessionMaxWaitingTimeInSecond": 15,
+            "sessionMaxIdleTimeInSecond": 150,
+            "sessionMaxWaitingTime": 15000
+        },
+        "logger": {
+            "ignoredCommands": "[PING, PONG]"
+        },
+        "zones": {
+            "size": 2,
+            "zones": [{
+                    "maxUsers": 10000,
+                    "userManagement": {
+                        "allowGuestLogin": true,
+                        "userMaxIdleTime": 15000,
+                        "allowChangeSession": true,
+                        "guestNamePrefix": "Guest#",
+                        "maxSessionPerUser": 15,
+                        "userMaxIdleTimeInSecond": 15,
+                        "userNamePattern": "^[a-zA-Z0-9_.#]{3,36}$"
+                    },
+                    "streaming": {
+                        "enable": false
+                    },
+                    "plugins": {
+                        "size": 1,
+                        "plugins": [{
+                                "listenEvents": "[USER_REMOVED, USER_LOGIN, USER_ADDED]",
+                                "folder": "hello-world-plugin",
+                                "threadPoolSize": 3,
+                                "configFile": "config/config.properties",
+                                "name": "hello-world",
+                                "entryLoader": "com.example.hello_world.plugin.PluginEntryLoader",
+                                "id": 1,
+                                "priority": -1
+                            }]
+                    },
+                    "configFile": "ezy-zone-settings.xml",
+                    "name": "example",
+                    "id": 1,
+                    "eventControllers": {
+                        "eventControllers": []
+                    },
+                    "applications": {
+                        "size": 1,
+                        "apps": [{
+                                "maxUsers": 999999,
+                                "folder": "hello-world-entry",
+                                "threadPoolSize": 3,
+                                "configFile": "config/config.properties",
+                                "name": "hello-world",
+                                "entryLoader": "com.example.hello_world.AppEntryLoader",
+                                "id": 1
+                            }]
+                    }
+                }, {
+                    "maxUsers": 10000,
+                    "userManagement": {
+                        "allowGuestLogin": true,
+                        "userMaxIdleTime": 15000,
+                        "allowChangeSession": true,
+                        "guestNamePrefix": "Guest#",
+                        "maxSessionPerUser": 15,
+                        "userMaxIdleTimeInSecond": 15,
+                        "userNamePattern": "^[a-zA-Z0-9_.#]{3,36}$"
+                    },
+                    "streaming": {
+                        "enable": true
+                    },
+                    "plugins": {
+                        "size": 1,
+                        "plugins": [{
+                                "listenEvents": "[USER_REMOVED, USER_LOGIN, USER_ADDED]",
+                                "folder": "chat-tutorial-plugin",
+                                "threadPoolSize": 0,
+                                "configFile": "config/config.properties",
+                                "name": "chat-tutorial",
+                                "entryLoader": "com.youngmonkeys.plugin.PluginEntryLoader",
+                                "id": 2,
+                                "priority": -1
+                            }]
+                    },
+                    "configFile": "chat-tutorial-zone-settings.xml",
+                    "name": "chat-tutorial",
+                    "id": 2,
+                    "eventControllers": {
+                        "eventControllers": []
+                    },
+                    "applications": {
+                        "size": 1,
+                        "apps": [{
+                                "maxUsers": 999999,
+                                "folder": "chat-tutorial-app-entry",
+                                "threadPoolSize": 0,
+                                "configFile": "config/config.properties",
+                                "name": "chat-tutorial",
+                                "entryLoader": "com.youngmonkeys.app.AppEntryLoader",
+                                "id": 2
+                            }]
+                    }
+                }]
+        },
+        "eventControllers": {
+            "eventControllers": []
+        },
+        "streaming": {
+            "enable": false
+        },
+        "threadPoolSize": {
+            "extensionRequestHandler": 8,
+            "socketUserRemovalHandler": 3,
+            "streamHandler": 8,
+            "socketDisconnectionHandler": 2,
+            "socketDataReceiver": 8,
+            "statistics": 1,
+            "systemRequestHandler": 8
+        },
+        "websocket": {
+            "codecCreator": "com.tvd12.ezyfox.codec.JacksonCodecCreator",
+            "address": "0.0.0.0",
+            "sslConfig": {
+                "file": "ssl-config.properties",
+                "loader": "com.tvd12.ezyfoxserver.ssl.EzySimpleSslConfigLoader",
+                "contextFactoryBuilder": "com.tvd12.ezyfoxserver.ssl.EzySimpleSslContextFactoryBuilder"
+            },
+            "port": 2208,
+            "sslActive": false,
+            "active": true,
+            "sslPort": 2812,
+            "maxFrameSize": 2048,
+            "writerThreadPoolSize": 8
+        },
+        "socket": {
+            "codecCreator": "com.tvd12.ezyfox.codec.MsgPackCodecCreator",
+            "address": "0.0.0.0",
+            "maxRequestSize": 2048,
+            "port": 3005,
+            "sslActive": false,
+            "active": true,
+            "tcpNoDelay": false,
+            "writerThreadPoolSize": 8
+        },
+        "admins": {
+            "count": 1,
+            "admins": [{
+                    "password": "*******",
+                    "accessToken": "*******",
+                    "username": "admin"
+                }]
+        }
+    },
+    "version": "1.0.0",
+    "config": {
+        "loggerConfigFile": "log4j.properties",
+        "enableAppClassLoader": true,
+        "ezyfoxHome": ""
+    }
+}
+16 Jul 2021 | 17:36:28,589 | DEBUG | main | wrapper.impl.EzyZoneUserManagerImpl |     | start user manager for zone: example
+16 Jul 2021 | 17:36:28,594 | DEBUG | main | wrapper.impl.EzyZoneUserManagerImpl |     | start user manager for zone: chat-tutorial
+16 Jul 2021 | 17:36:29,142 | DEBUG | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | starting local bootstrap ....
+16 Jul 2021 | 17:36:29,145 | INFO  | main | tvd12.ezyfoxserver.EzyZonesStarter |     | start zones: [chat-tutorial, example]
+16 Jul 2021 | 17:36:29,145 | INFO  | main | tvd12.ezyfoxserver.EzyZonesStarter |     | start all plugins ...
+16 Jul 2021 | 17:36:29,148 | INFO  | main | tvd12.ezyfoxserver.EzyPluginsStarter |     | start plugins: [chat-tutorial]
+16 Jul 2021 | 17:36:29,148 | DEBUG | main | tvd12.ezyfoxserver.EzyPluginsStarter |     | plugin: chat-tutorial loading...
+16 Jul 2021 | 17:36:29,616 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name mongoConfig of class com.youngmonkeys.common.config.MongoConfig, object = com.youngmonkeys.common.config.MongoConfig@3899782c
+16 Jul 2021 | 17:36:30,758 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:30,763 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:30,763 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,763 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:30,780 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUserId$EzyObjectWriter$EzyAutoImpl$1 has generated
+16 Jul 2021 | 17:36:30,789 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:30,791 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:30,792 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,793 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:30,809 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUserId$EzyObjectReader$EzyAutoImpl$1 has generated
+16 Jul 2021 | 17:36:30,812 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:30,812 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:30,812 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,812 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:30,815 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUserId$EzyObjectUnwrapper$EzyAutoImpl$1 has generated
+16 Jul 2021 | 17:36:30,816 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:30,817 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,817 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:30,822 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUser$EzyObjectWriter$EzyAutoImpl$2 has generated
+16 Jul 2021 | 17:36:30,823 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:30,823 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,824 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:30,829 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUser$EzyObjectReader$EzyAutoImpl$2 has generated
+16 Jul 2021 | 17:36:30,833 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:30,834 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,835 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:30,842 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUser$EzyObjectUnwrapper$EzyAutoImpl$2 has generated
+16 Jul 2021 | 17:36:30,843 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:30,844 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,844 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,844 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field password
+16 Jul 2021 | 17:36:30,845 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:30,851 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.common.entity.ChatUser$EzyObjectWriter$EzyAutoImpl$3 has generated
+16 Jul 2021 | 17:36:30,853 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:30,853 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,854 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,854 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field password
+16 Jul 2021 | 17:36:30,860 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:30,864 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.common.entity.ChatUser$EzyObjectReader$EzyAutoImpl$3 has generated
+16 Jul 2021 | 17:36:30,866 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:30,866 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,867 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,867 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field password
+16 Jul 2021 | 17:36:30,867 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:30,883 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.common.entity.ChatUser$EzyObjectUnwrapper$EzyAutoImpl$3 has generated
+16 Jul 2021 | 17:36:30,886 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:30,888 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,888 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,889 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:30,895 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectWriter$EzyAutoImpl$4 has generated
+16 Jul 2021 | 17:36:30,897 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:30,901 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,902 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,902 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:30,906 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectReader$EzyAutoImpl$4 has generated
+16 Jul 2021 | 17:36:30,908 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:30,908 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,909 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:30,909 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:30,914 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectUnwrapper$EzyAutoImpl$4 has generated
+16 Jul 2021 | 17:36:30,915 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:30,915 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:30,916 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:30,922 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectWriter$EzyAutoImpl$5 has generated
+16 Jul 2021 | 17:36:30,924 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:30,925 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:30,925 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:30,932 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectReader$EzyAutoImpl$5 has generated
+16 Jul 2021 | 17:36:30,933 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:30,936 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:30,936 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:30,943 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectUnwrapper$EzyAutoImpl$5 has generated
+16 Jul 2021 | 17:36:30,951 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:30,952 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,952 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:30,952 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:30,952 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:30,952 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:30,956 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectWriter$EzyAutoImpl$6 has generated
+16 Jul 2021 | 17:36:30,957 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:30,958 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,958 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:30,959 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:30,961 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:30,962 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:30,969 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectReader$EzyAutoImpl$6 has generated
+16 Jul 2021 | 17:36:30,970 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:30,970 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:30,971 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:30,971 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:30,971 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:30,971 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:30,977 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectUnwrapper$EzyAutoImpl$6 has generated
+16 Jul 2021 | 17:36:30,984 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatChannelUsers
+16 Jul 2021 | 17:36:30,991 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:30,993 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field usernames
+16 Jul 2021 | 17:36:30,993 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatChannelUsers
+16 Jul 2021 | 17:36:31,008 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.data.ChatChannelUsers$EzyObjectWriter$EzyAutoImpl$7 has generated
+16 Jul 2021 | 17:36:31,010 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,010 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,011 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,023 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectWriter$EzyAutoImpl$8 has generated
+16 Jul 2021 | 17:36:31,026 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,028 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,028 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,049 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectReader$EzyAutoImpl$7 has generated
+16 Jul 2021 | 17:36:31,053 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,056 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,057 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,064 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectUnwrapper$EzyAutoImpl$7 has generated
+16 Jul 2021 | 17:36:31,066 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,066 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,067 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,070 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,083 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectWriter$EzyAutoImpl$9 has generated
+16 Jul 2021 | 17:36:31,086 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,087 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,087 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,087 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,092 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectReader$EzyAutoImpl$8 has generated
+16 Jul 2021 | 17:36:31,094 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,094 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,099 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,099 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,105 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectUnwrapper$EzyAutoImpl$8 has generated
+16 Jul 2021 | 17:36:31,105 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:31,105 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,106 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:31,114 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatChannel$EzyObjectWriter$EzyAutoImpl$10 has generated
+16 Jul 2021 | 17:36:31,115 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:31,117 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,117 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:31,122 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatChannel$EzyObjectReader$EzyAutoImpl$9 has generated
+16 Jul 2021 | 17:36:31,129 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:31,134 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,135 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:31,138 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatChannel$EzyObjectUnwrapper$EzyAutoImpl$9 has generated
+16 Jul 2021 | 17:36:31,139 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,140 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,141 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,152 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectWriter$EzyAutoImpl$11 has generated
+16 Jul 2021 | 17:36:31,158 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,159 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,160 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,168 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectReader$EzyAutoImpl$10 has generated
+16 Jul 2021 | 17:36:31,170 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,174 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,195 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,210 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectUnwrapper$EzyAutoImpl$10 has generated
+16 Jul 2021 | 17:36:31,214 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,215 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:31,216 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,227 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectWriter$EzyAutoImpl$12 has generated
+16 Jul 2021 | 17:36:31,231 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,235 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:31,242 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,252 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectReader$EzyAutoImpl$11 has generated
+16 Jul 2021 | 17:36:31,255 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,256 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:31,256 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,276 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectUnwrapper$EzyAutoImpl$11 has generated
+16 Jul 2021 | 17:36:31,278 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:31,278 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,279 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:31,285 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectWriter$EzyAutoImpl$13 has generated
+16 Jul 2021 | 17:36:31,286 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:31,300 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,300 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:31,310 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectReader$EzyAutoImpl$12 has generated
+16 Jul 2021 | 17:36:31,312 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:31,313 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,314 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:31,335 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectUnwrapper$EzyAutoImpl$12 has generated
+16 Jul 2021 | 17:36:31,340 | DEBUG | main | ezydata.mongodb.EzyMongoDatabaseContextBuilder |     | 
+====================== DATABASE CONTEXT ===============
+list of queries: 4
+public abstract java.util.List com.youngmonkeys.app.repo.ChatChannelUserRepo.findByChannelId(long)={'_id.channelId': ?0}
+public abstract java.util.List com.youngmonkeys.app.repo.ChatChannelUserRepo.findByChannelIds(java.util.List)={'_id.channelId': {$in: ?0}}
+public abstract java.util.List com.youngmonkeys.app.repo.ChatChannelUserRepo.findByUser(java.lang.String)={'_id.username': ?0}
+public abstract java.util.List com.youngmonkeys.app.repo.ChatMessageRepo.findByChannelId(long)={'channelId': ?0}
+
+list of repositories: 5
+userRepo=com.youngmonkeys.common.repo.ChatUserRepo$EzyDatabaseRepository$EzyAutoImpl$4
+chatChannelRepo=com.youngmonkeys.app.repo.ChatChannelRepo$EzyDatabaseRepository$EzyAutoImpl$2
+chatMessageRepo=com.youngmonkeys.app.repo.ChatMessageRepo$EzyDatabaseRepository$EzyAutoImpl$3
+ezyMaxIdRepository=com.tvd12.ezydata.mongodb.repository.EzyMongoMaxIdRepository
+chatChannelUserRepo=com.youngmonkeys.app.repo.ChatChannelUserRepo$EzyDatabaseRepository$EzyAutoImpl$1
+
+list of result deserializers: 58
+[[C=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Byte=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.time.LocalDateTime=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.math.BigInteger=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[J=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Z=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Z=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[S=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[D=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Boolean;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+double=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[D=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Double=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Float;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Integer;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Float=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+float=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.math.BigDecimal=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+byte=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Double;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[B=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Short;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[C=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Short;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Byte;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Double;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Boolean;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.String;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+char=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+short=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+int=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.util.Date=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Float;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Long=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Character;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[F=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.time.LocalDate=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.String;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Class=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[I=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Boolean=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Long;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[J=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.String=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Long;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Byte;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.util.UUID=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[B=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[F=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Integer;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Character;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Short=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Integer=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[S=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[I=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+boolean=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+long=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Character=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+=======================================================
+16 Jul 2021 | 17:36:31,412 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name userService of class com.youngmonkeys.common.service.impl.ChatUserServiceImpl, object = com.youngmonkeys.common.service.impl.ChatUserServiceImpl@6ea1bcdc
+16 Jul 2021 | 17:36:31,413 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.common.service.impl.ChatUserServiceImpl@6ea1bcdc invoke method: setChatUserRepo with value: com.youngmonkeys.common.repo.ChatUserRepo$EzyDatabaseRepository$EzyAutoImpl$4@46074492
+16 Jul 2021 | 17:36:31,415 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name maxIdService of class com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl, object = com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@64712be
+16 Jul 2021 | 17:36:31,416 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@64712be invoke method: setMaxIdRepository with value: com.tvd12.ezydata.mongodb.repository.EzyMongoMaxIdRepository@c9413d8
+16 Jul 2021 | 17:36:31,427 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name serverReadyController of class com.youngmonkeys.plugin.controller.ServerReadyController, object = com.youngmonkeys.plugin.controller.ServerReadyController@5ae81e1
+16 Jul 2021 | 17:36:31,429 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name userLoginController of class com.youngmonkeys.plugin.controller.UserLoginController, object = com.youngmonkeys.plugin.controller.UserLoginController@6063d80a
+16 Jul 2021 | 17:36:31,430 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name welcomeService of class com.youngmonkeys.plugin.service.WelcomeService, object = com.youngmonkeys.plugin.service.WelcomeService@1133ec6e
+16 Jul 2021 | 17:36:31,431 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.plugin.service.WelcomeService set field: config with value: PluginConfig(welcomePrefix=Welcome)
+16 Jul 2021 | 17:36:31,432 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name commonService of class com.youngmonkeys.common.service.CommonService, object = com.youngmonkeys.common.service.CommonService@355e34c7
+16 Jul 2021 | 17:36:31,432 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.plugin.service.WelcomeService set field: commonService with value: com.youngmonkeys.common.service.CommonService@355e34c7
+16 Jul 2021 | 17:36:31,433 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.plugin.controller.UserLoginController set field: welcomeService with value: com.youngmonkeys.plugin.service.WelcomeService@1133ec6e
+16 Jul 2021 | 17:36:31,438 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.plugin.controller.UserLoginController set field: userService with value: com.youngmonkeys.common.service.impl.ChatUserServiceImpl@6ea1bcdc
+16 Jul 2021 | 17:36:31,510 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | unload bean: (maxIdService,ChatMaxIdService), uncompleted: [class com.youngmonkeys.common.service.impl.ChatUserServiceImpl]
+16 Jul 2021 | 17:36:31,511 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | try load bean (maxIdService,ChatMaxIdService) again
+16 Jul 2021 | 17:36:31,512 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | found singleton com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@64712be with key (maxIdService,ChatMaxIdService)
+16 Jul 2021 | 17:36:31,516 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.common.service.impl.ChatUserServiceImpl@6ea1bcdc invoke method: setChatUserRepo with value: com.youngmonkeys.common.repo.ChatUserRepo$EzyDatabaseRepository$EzyAutoImpl$4@46074492
+16 Jul 2021 | 17:36:31,516 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.common.service.impl.ChatUserServiceImpl@6ea1bcdc invoke method: setMaxIdService with value: com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@64712be
+16 Jul 2021 | 17:36:31,553 | DEBUG | main | tvd12.ezyfoxserver.EzyPluginsStarter |     | plugin: chat-tutorial loaded
+16 Jul 2021 | 17:36:31,554 | INFO  | main | tvd12.ezyfoxserver.EzyZonesStarter |     | start all apps ...
+16 Jul 2021 | 17:36:31,557 | INFO  | main | tvd12.ezyfoxserver.EzyAppsStarter |     | start apps: [chat-tutorial]
+16 Jul 2021 | 17:36:31,558 | DEBUG | main | tvd12.ezyfoxserver.EzyAppsStarter |     | app: chat-tutorial loading...
+16 Jul 2021 | 17:36:31,559 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | loadClass(com.youngmonkeys.app.AppEntryLoader)
+16 Jul 2021 | 17:36:31,560 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | findClass(com.youngmonkeys.app.AppEntryLoader)
+16 Jul 2021 | 17:36:31,563 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | loadClass(com.tvd12.ezyfoxserver.ext.EzyAbstractAppEntryLoader)
+16 Jul 2021 | 17:36:31,565 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | loadClass(com.tvd12.ezyfox.reflect.EzyClasses)
+16 Jul 2021 | 17:36:31,567 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | loadClass(com.tvd12.ezyfoxserver.ext.EzyAppEntry)
+16 Jul 2021 | 17:36:31,597 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,598 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,598 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,604 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectWriter$EzyAutoImpl$14 has generated
+16 Jul 2021 | 17:36:31,605 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,605 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,606 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,625 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectReader$EzyAutoImpl$13 has generated
+16 Jul 2021 | 17:36:31,627 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,628 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,629 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:31,633 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectUnwrapper$EzyAutoImpl$13 has generated
+16 Jul 2021 | 17:36:31,634 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,634 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,634 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,635 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,641 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectWriter$EzyAutoImpl$15 has generated
+16 Jul 2021 | 17:36:31,642 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,643 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,643 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,643 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,650 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectReader$EzyAutoImpl$14 has generated
+16 Jul 2021 | 17:36:31,650 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,655 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,657 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,659 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:31,666 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectUnwrapper$EzyAutoImpl$14 has generated
+16 Jul 2021 | 17:36:31,667 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:31,667 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,669 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:31,669 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:31,676 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectWriter$EzyAutoImpl$16 has generated
+16 Jul 2021 | 17:36:31,678 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:31,679 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,715 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:31,715 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:31,728 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectReader$EzyAutoImpl$15 has generated
+16 Jul 2021 | 17:36:31,729 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:31,730 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,730 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:31,730 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:31,734 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectUnwrapper$EzyAutoImpl$15 has generated
+16 Jul 2021 | 17:36:31,736 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:31,737 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,737 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:31,740 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectWriter$EzyAutoImpl$17 has generated
+16 Jul 2021 | 17:36:31,741 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:31,742 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,793 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:31,797 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectReader$EzyAutoImpl$16 has generated
+16 Jul 2021 | 17:36:31,798 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:31,799 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,800 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:31,812 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectUnwrapper$EzyAutoImpl$16 has generated
+16 Jul 2021 | 17:36:31,817 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:31,819 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,819 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,820 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,820 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:31,820 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:31,829 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectWriter$EzyAutoImpl$18 has generated
+16 Jul 2021 | 17:36:31,830 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:31,831 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,833 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,833 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,834 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:31,853 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:31,862 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectReader$EzyAutoImpl$17 has generated
+16 Jul 2021 | 17:36:31,878 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:31,879 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:31,879 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,879 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,880 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:31,880 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:31,884 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectUnwrapper$EzyAutoImpl$17 has generated
+16 Jul 2021 | 17:36:31,889 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatChannelUsers
+16 Jul 2021 | 17:36:31,891 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:31,892 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field usernames
+16 Jul 2021 | 17:36:31,893 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatChannelUsers
+16 Jul 2021 | 17:36:31,902 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.data.ChatChannelUsers$EzyObjectWriter$EzyAutoImpl$19 has generated
+16 Jul 2021 | 17:36:31,904 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,908 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,909 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,914 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectWriter$EzyAutoImpl$20 has generated
+16 Jul 2021 | 17:36:31,915 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,916 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,917 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,937 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectReader$EzyAutoImpl$18 has generated
+16 Jul 2021 | 17:36:31,938 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,939 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:31,939 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:31,943 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectUnwrapper$EzyAutoImpl$18 has generated
+16 Jul 2021 | 17:36:31,943 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,943 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:31,944 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,950 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectWriter$EzyAutoImpl$21 has generated
+16 Jul 2021 | 17:36:31,953 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,954 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:31,963 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,970 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectReader$EzyAutoImpl$19 has generated
+16 Jul 2021 | 17:36:31,975 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,976 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:31,977 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:31,983 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectUnwrapper$EzyAutoImpl$19 has generated
+16 Jul 2021 | 17:36:31,984 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:31,985 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:31,985 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:31,988 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectWriter$EzyAutoImpl$22 has generated
+16 Jul 2021 | 17:36:31,989 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,014 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,015 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,024 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectReader$EzyAutoImpl$20 has generated
+16 Jul 2021 | 17:36:32,029 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,030 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,030 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,033 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectUnwrapper$EzyAutoImpl$20 has generated
+16 Jul 2021 | 17:36:32,242 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name mongoConfig of class com.youngmonkeys.common.config.MongoConfig, object = com.youngmonkeys.common.config.MongoConfig@52eacb4b
+16 Jul 2021 | 17:36:32,314 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:32,315 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,316 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,316 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:32,323 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUserId$EzyObjectWriter$EzyAutoImpl$23 has generated
+16 Jul 2021 | 17:36:32,324 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:32,325 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,325 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,325 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:32,328 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUserId$EzyObjectReader$EzyAutoImpl$21 has generated
+16 Jul 2021 | 17:36:32,330 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:32,331 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,331 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,334 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUserId
+16 Jul 2021 | 17:36:32,338 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUserId$EzyObjectUnwrapper$EzyAutoImpl$21 has generated
+16 Jul 2021 | 17:36:32,342 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:32,343 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,343 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:32,346 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUser$EzyObjectWriter$EzyAutoImpl$24 has generated
+16 Jul 2021 | 17:36:32,361 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:32,362 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,365 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:32,373 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUser$EzyObjectReader$EzyAutoImpl$22 has generated
+16 Jul 2021 | 17:36:32,376 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:32,377 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,381 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannelUser
+16 Jul 2021 | 17:36:32,392 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatChannelUser$EzyObjectUnwrapper$EzyAutoImpl$22 has generated
+16 Jul 2021 | 17:36:32,396 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:32,398 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,399 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,399 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field password
+16 Jul 2021 | 17:36:32,399 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:32,404 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.common.entity.ChatUser$EzyObjectWriter$EzyAutoImpl$25 has generated
+16 Jul 2021 | 17:36:32,405 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:32,406 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,406 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,406 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field password
+16 Jul 2021 | 17:36:32,410 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:32,429 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.common.entity.ChatUser$EzyObjectReader$EzyAutoImpl$23 has generated
+16 Jul 2021 | 17:36:32,437 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:32,438 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,438 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,438 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field password
+16 Jul 2021 | 17:36:32,438 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.common.entity.ChatUser
+16 Jul 2021 | 17:36:32,443 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.common.entity.ChatUser$EzyObjectUnwrapper$EzyAutoImpl$23 has generated
+16 Jul 2021 | 17:36:32,445 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:32,445 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,445 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,445 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:32,448 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectWriter$EzyAutoImpl$26 has generated
+16 Jul 2021 | 17:36:32,449 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:32,449 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,449 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,465 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:32,480 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectReader$EzyAutoImpl$24 has generated
+16 Jul 2021 | 17:36:32,484 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:32,489 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,495 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field username
+16 Jul 2021 | 17:36:32,495 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatContact
+16 Jul 2021 | 17:36:32,504 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.data.ChatContact$EzyObjectUnwrapper$EzyAutoImpl$24 has generated
+16 Jul 2021 | 17:36:32,505 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:32,505 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:32,505 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:32,507 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectWriter$EzyAutoImpl$27 has generated
+16 Jul 2021 | 17:36:32,508 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:32,509 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:32,509 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:32,517 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectReader$EzyAutoImpl$25 has generated
+16 Jul 2021 | 17:36:32,518 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:32,519 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:32,519 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GoRequest
+16 Jul 2021 | 17:36:32,521 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.GoRequest$EzyObjectUnwrapper$EzyAutoImpl$25 has generated
+16 Jul 2021 | 17:36:32,522 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:32,522 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,522 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,522 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,523 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:32,523 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:32,534 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectWriter$EzyAutoImpl$28 has generated
+16 Jul 2021 | 17:36:32,536 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:32,546 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,546 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,546 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,547 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:32,547 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:32,553 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectReader$EzyAutoImpl$26 has generated
+16 Jul 2021 | 17:36:32,553 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:32,554 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,554 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,554 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,554 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field sender
+16 Jul 2021 | 17:36:32,554 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatMessage
+16 Jul 2021 | 17:36:32,556 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatMessage$EzyObjectUnwrapper$EzyAutoImpl$26 has generated
+16 Jul 2021 | 17:36:32,564 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.data.ChatChannelUsers
+16 Jul 2021 | 17:36:32,565 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,568 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field usernames
+16 Jul 2021 | 17:36:32,569 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.data.ChatChannelUsers
+16 Jul 2021 | 17:36:32,577 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.data.ChatChannelUsers$EzyObjectWriter$EzyAutoImpl$29 has generated
+16 Jul 2021 | 17:36:32,578 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:32,578 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,579 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:32,587 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectWriter$EzyAutoImpl$30 has generated
+16 Jul 2021 | 17:36:32,589 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:32,591 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,591 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:32,604 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectReader$EzyAutoImpl$27 has generated
+16 Jul 2021 | 17:36:32,605 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:32,605 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,606 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.HelloResponse
+16 Jul 2021 | 17:36:32,611 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.response.HelloResponse$EzyObjectUnwrapper$EzyAutoImpl$27 has generated
+16 Jul 2021 | 17:36:32,613 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:32,627 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,627 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,628 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:32,634 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectWriter$EzyAutoImpl$31 has generated
+16 Jul 2021 | 17:36:32,638 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:32,642 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,643 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,643 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:32,655 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectReader$EzyAutoImpl$28 has generated
+16 Jul 2021 | 17:36:32,656 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:32,657 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,657 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field channelId
+16 Jul 2021 | 17:36:32,657 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.MessageRequest
+16 Jul 2021 | 17:36:32,665 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.MessageRequest$EzyObjectUnwrapper$EzyAutoImpl$28 has generated
+16 Jul 2021 | 17:36:32,667 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:32,667 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,670 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:32,689 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.entity.ChatChannel$EzyObjectWriter$EzyAutoImpl$32 has generated
+16 Jul 2021 | 17:36:32,691 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:32,692 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,692 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:32,701 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.entity.ChatChannel$EzyObjectReader$EzyAutoImpl$29 has generated
+16 Jul 2021 | 17:36:32,704 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:32,705 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field id
+16 Jul 2021 | 17:36:32,705 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.entity.ChatChannel
+16 Jul 2021 | 17:36:32,709 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.entity.ChatChannel$EzyObjectUnwrapper$EzyAutoImpl$29 has generated
+16 Jul 2021 | 17:36:32,710 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:32,710 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:32,710 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:32,714 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectWriter$EzyAutoImpl$33 has generated
+16 Jul 2021 | 17:36:32,717 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:32,718 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:32,740 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:32,748 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectReader$EzyAutoImpl$30 has generated
+16 Jul 2021 | 17:36:32,751 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:32,751 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field nickName
+16 Jul 2021 | 17:36:32,752 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.HelloRequest
+16 Jul 2021 | 17:36:32,761 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.HelloRequest$EzyObjectUnwrapper$EzyAutoImpl$30 has generated
+16 Jul 2021 | 17:36:32,762 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:32,762 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:32,762 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:32,766 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectWriter$EzyAutoImpl$34 has generated
+16 Jul 2021 | 17:36:32,767 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:32,788 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:32,788 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:32,793 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectReader$EzyAutoImpl$31 has generated
+16 Jul 2021 | 17:36:32,795 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:32,795 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field users
+16 Jul 2021 | 17:36:32,796 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.request.GetChannelRequest
+16 Jul 2021 | 17:36:32,808 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.request.GetChannelRequest$EzyObjectUnwrapper$EzyAutoImpl$31 has generated
+16 Jul 2021 | 17:36:32,809 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,809 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,809 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,817 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectWriter$EzyAutoImpl$35 has generated
+16 Jul 2021 | 17:36:32,818 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,821 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,821 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,830 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectReader$EzyAutoImpl$32 has generated
+16 Jul 2021 | 17:36:32,832 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,856 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:32,857 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.youngmonkeys.app.response.GoResponse
+16 Jul 2021 | 17:36:32,871 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.youngmonkeys.app.response.GoResponse$EzyObjectUnwrapper$EzyAutoImpl$32 has generated
+16 Jul 2021 | 17:36:32,876 | DEBUG | main | ezydata.mongodb.EzyMongoDatabaseContextBuilder |     | 
+====================== DATABASE CONTEXT ===============
+list of queries: 4
+public abstract java.util.List com.youngmonkeys.app.repo.ChatChannelUserRepo.findByChannelId(long)={'_id.channelId': ?0}
+public abstract java.util.List com.youngmonkeys.app.repo.ChatChannelUserRepo.findByChannelIds(java.util.List)={'_id.channelId': {$in: ?0}}
+public abstract java.util.List com.youngmonkeys.app.repo.ChatChannelUserRepo.findByUser(java.lang.String)={'_id.username': ?0}
+public abstract java.util.List com.youngmonkeys.app.repo.ChatMessageRepo.findByChannelId(long)={'channelId': ?0}
+
+list of repositories: 5
+userRepo=com.youngmonkeys.common.repo.ChatUserRepo$EzyDatabaseRepository$EzyAutoImpl$8
+chatChannelRepo=com.youngmonkeys.app.repo.ChatChannelRepo$EzyDatabaseRepository$EzyAutoImpl$6
+chatMessageRepo=com.youngmonkeys.app.repo.ChatMessageRepo$EzyDatabaseRepository$EzyAutoImpl$7
+ezyMaxIdRepository=com.tvd12.ezydata.mongodb.repository.EzyMongoMaxIdRepository
+chatChannelUserRepo=com.youngmonkeys.app.repo.ChatChannelUserRepo$EzyDatabaseRepository$EzyAutoImpl$5
+
+list of result deserializers: 58
+[[C=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Byte=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.time.LocalDateTime=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.math.BigInteger=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[J=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Z=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Z=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[S=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[D=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Boolean;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+double=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[D=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Double=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Float;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Integer;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Float=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+float=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.math.BigDecimal=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+byte=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Double;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[B=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Short;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[C=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Short;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Byte;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Double;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Boolean;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.String;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+char=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+short=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+int=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.util.Date=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Float;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Long=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Character;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[F=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.time.LocalDate=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.String;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Class=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[I=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Boolean=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[Ljava.lang.Long;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[J=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.String=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Long;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Byte;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.util.UUID=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[B=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[F=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Integer;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[[Ljava.lang.Character;=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Short=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Integer=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[S=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+[I=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+boolean=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+long=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+java.lang.Character=com.tvd12.ezydata.database.converter.EzyResultDeserializer$1
+=======================================================
+16 Jul 2021 | 17:36:32,947 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name userService of class com.youngmonkeys.common.service.impl.ChatUserServiceImpl, object = com.youngmonkeys.common.service.impl.ChatUserServiceImpl@54a3ab8f
+16 Jul 2021 | 17:36:32,948 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.common.service.impl.ChatUserServiceImpl@54a3ab8f invoke method: setChatUserRepo with value: com.youngmonkeys.common.repo.ChatUserRepo$EzyDatabaseRepository$EzyAutoImpl$8@7bfc3126
+16 Jul 2021 | 17:36:32,952 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name maxIdService of class com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl, object = com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@1968a49c
+16 Jul 2021 | 17:36:32,952 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@1968a49c invoke method: setMaxIdRepository with value: com.tvd12.ezydata.mongodb.repository.EzyMongoMaxIdRepository@2c282004
+16 Jul 2021 | 17:36:32,974 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name chatRequestController of class com.youngmonkeys.app.controller.ChatRequestController, object = com.youngmonkeys.app.controller.ChatRequestController@622ef26a
+16 Jul 2021 | 17:36:32,974 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.controller.ChatRequestController set field: userService with value: com.youngmonkeys.common.service.impl.ChatUserServiceImpl@54a3ab8f
+16 Jul 2021 | 17:36:32,978 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name greetRequestController of class com.youngmonkeys.app.controller.GreetRequestController, object = com.youngmonkeys.app.controller.GreetRequestController@5f577419
+16 Jul 2021 | 17:36:32,979 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.controller.GreetRequestController set field: responseFactory with value: com.tvd12.ezyfoxserver.support.factory.EzyAppResponseFactory@287f94b1
+16 Jul 2021 | 17:36:32,984 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name greetingService of class com.youngmonkeys.app.service.GreetingService, object = com.youngmonkeys.app.service.GreetingService@3d526ad9
+16 Jul 2021 | 17:36:32,997 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.service.GreetingService set field: appConfig with value: AppConfig(helloPrefix=Hello, goPrefix=Come on)
+16 Jul 2021 | 17:36:32,998 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name commonService of class com.youngmonkeys.common.service.CommonService, object = com.youngmonkeys.common.service.CommonService@e041f0c
+16 Jul 2021 | 17:36:32,999 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.service.GreetingService set field: commonService with value: com.youngmonkeys.common.service.CommonService@e041f0c
+16 Jul 2021 | 17:36:33,000 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.controller.GreetRequestController set field: greetingService with value: com.youngmonkeys.app.service.GreetingService@3d526ad9
+16 Jul 2021 | 17:36:33,003 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name serverReadyController of class com.youngmonkeys.app.controller.ServerReadyController, object = com.youngmonkeys.app.controller.ServerReadyController@3a71c100
+16 Jul 2021 | 17:36:33,006 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name chatMessageService of class com.youngmonkeys.app.service.impl.ChatMessageServiceImpl, object = com.youngmonkeys.app.service.impl.ChatMessageServiceImpl@f325091
+16 Jul 2021 | 17:36:33,007 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.app.service.impl.ChatMessageServiceImpl@f325091 invoke method: setMessageRepo with value: com.youngmonkeys.app.repo.ChatMessageRepo$EzyDatabaseRepository$EzyAutoImpl$7@78e16155
+16 Jul 2021 | 17:36:33,007 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.app.service.impl.ChatMessageServiceImpl@f325091 invoke method: setMaxIdService with value: com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@1968a49c
+16 Jul 2021 | 17:36:33,009 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name chatChannelUserService of class com.youngmonkeys.app.service.impl.ChatChannelUserServiceImpl, object = com.youngmonkeys.app.service.impl.ChatChannelUserServiceImpl@437e951d
+16 Jul 2021 | 17:36:33,083 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.app.service.impl.ChatChannelUserServiceImpl@437e951d invoke method: setChannelUserRepo with value: com.youngmonkeys.app.repo.ChatChannelUserRepo$EzyDatabaseRepository$EzyAutoImpl$5@53bc1328
+16 Jul 2021 | 17:36:33,101 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name chatChannelService of class com.youngmonkeys.app.service.impl.ChatChannelServiceImpl, object = com.youngmonkeys.app.service.impl.ChatChannelServiceImpl@63a5e46c
+16 Jul 2021 | 17:36:33,102 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.app.service.impl.ChatChannelServiceImpl@63a5e46c invoke method: setChannelRepo with value: com.youngmonkeys.app.repo.ChatChannelRepo$EzyDatabaseRepository$EzyAutoImpl$6@3c1e3314
+16 Jul 2021 | 17:36:33,104 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.app.service.impl.ChatChannelServiceImpl@63a5e46c invoke method: setMaxIdService with value: com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@1968a49c
+16 Jul 2021 | 17:36:33,107 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | unload bean: (channelUserService,ChatChannelUserService), uncompleted: [class com.youngmonkeys.app.controller.ChatRequestController]
+16 Jul 2021 | 17:36:33,107 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | try load bean (channelUserService,ChatChannelUserService) again
+16 Jul 2021 | 17:36:33,107 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | found singleton com.youngmonkeys.app.service.impl.ChatChannelUserServiceImpl@437e951d with key (channelUserService,ChatChannelUserService)
+16 Jul 2021 | 17:36:33,110 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.controller.ChatRequestController set field: userService with value: com.youngmonkeys.common.service.impl.ChatUserServiceImpl@54a3ab8f
+16 Jul 2021 | 17:36:33,110 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.controller.ChatRequestController set field: channelUserService with value: com.youngmonkeys.app.service.impl.ChatChannelUserServiceImpl@437e951d
+16 Jul 2021 | 17:36:33,111 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.controller.ChatRequestController set field: channelService with value: com.youngmonkeys.app.service.impl.ChatChannelServiceImpl@63a5e46c
+16 Jul 2021 | 17:36:33,146 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.controller.ChatRequestController set field: messageService with value: com.youngmonkeys.app.service.impl.ChatMessageServiceImpl@f325091
+16 Jul 2021 | 17:36:33,146 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.youngmonkeys.app.controller.ChatRequestController set field: responseFactory with value: com.tvd12.ezyfoxserver.support.factory.EzyAppResponseFactory@287f94b1
+16 Jul 2021 | 17:36:33,147 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | unload bean: (maxIdService,ChatMaxIdService), uncompleted: [class com.youngmonkeys.common.service.impl.ChatUserServiceImpl]
+16 Jul 2021 | 17:36:33,147 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | try load bean (maxIdService,ChatMaxIdService) again
+16 Jul 2021 | 17:36:33,147 | DEBUG | main | bean.impl.EzySimpleBeanContext$Builder |     | found singleton com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@1968a49c with key (maxIdService,ChatMaxIdService)
+16 Jul 2021 | 17:36:33,148 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.common.service.impl.ChatUserServiceImpl@54a3ab8f invoke method: setChatUserRepo with value: com.youngmonkeys.common.repo.ChatUserRepo$EzyDatabaseRepository$EzyAutoImpl$8@7bfc3126
+16 Jul 2021 | 17:36:33,148 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | com.youngmonkeys.common.service.impl.ChatUserServiceImpl@54a3ab8f invoke method: setMaxIdService with value: com.youngmonkeys.common.service.impl.ChatMaxIdServiceImpl@1968a49c
+16 Jul 2021 | 17:36:33,261 | DEBUG | main | support.controller.EzyUserRequestAppSingletonController$Builder |     | add command 1 and request handler ChatRequestController$getAllUsers$Handler$AutoImpl$2@3d829787
+16 Jul 2021 | 17:36:33,262 | DEBUG | main | support.controller.EzyUserRequestAppSingletonController$Builder |     | add command 2 and request handler ChatRequestController$getChannel$Handler$AutoImpl$1@71652c98
+16 Jul 2021 | 17:36:33,262 | DEBUG | main | support.controller.EzyUserRequestAppSingletonController$Builder |     | add command 3 and request handler ChatRequestController$sendMessage$Handler$AutoImpl$3@51bde877
+16 Jul 2021 | 17:36:33,262 | DEBUG | main | support.controller.EzyUserRequestAppSingletonController$Builder |     | add command go and request handler GreetRequestController$sayGo$Handler$AutoImpl$5@60b85ba1
+16 Jul 2021 | 17:36:33,262 | DEBUG | main | support.controller.EzyUserRequestAppSingletonController$Builder |     | add command hello and request handler GreetRequestController$sayHello$Handler$AutoImpl$4@492fc69e
+16 Jul 2021 | 17:36:33,263 | DEBUG | main | tvd12.ezyfoxserver.EzyAppsStarter |     | app: chat-tutorial loaded
+16 Jul 2021 | 17:36:33,263 | INFO  | main | tvd12.ezyfoxserver.EzyZonesStarter |     | start all plugins ...
+16 Jul 2021 | 17:36:33,263 | INFO  | main | tvd12.ezyfoxserver.EzyPluginsStarter |     | start plugins: [hello-world]
+16 Jul 2021 | 17:36:33,263 | DEBUG | main | tvd12.ezyfoxserver.EzyPluginsStarter |     | plugin: hello-world loading...
+16 Jul 2021 | 17:36:33,266 | INFO  | main | hello_world.plugin.PluginEntry |     | 
+=================== HELLO-WORLD PLUGIN START CONFIG ================
+
+16 Jul 2021 | 17:36:33,277 | INFO  | main | hello_world.plugin.PluginEntry |     | hello-world plugin config file: plugins/hello-world-plugin/config/config.properties
+16 Jul 2021 | 17:36:33,467 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name serverReadyController of class com.example.hello_world.plugin.controller.ServerReadyController, object = com.example.hello_world.plugin.controller.ServerReadyController@5a6d5a8f
+16 Jul 2021 | 17:36:33,469 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.example.hello_world.plugin.controller.ServerReadyController set field: pluginConfig with value: PluginConfig(environment=local, database=PluginConfig.DatabaseConfig(name=hello-world, host=localhost, port=27017))
+16 Jul 2021 | 17:36:33,471 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name userLoginController of class com.example.hello_world.plugin.controller.UserLoginController, object = com.example.hello_world.plugin.controller.UserLoginController@4a67318f
+16 Jul 2021 | 17:36:33,480 | INFO  | main | hello_world.plugin.PluginEntry |     | add  event SERVER_READY controller com.example.hello_world.plugin.controller.ServerReadyController@5a6d5a8f
+16 Jul 2021 | 17:36:33,482 | INFO  | main | hello_world.plugin.PluginEntry |     | add  event USER_LOGIN controller com.example.hello_world.plugin.controller.UserLoginController@4a67318f
+16 Jul 2021 | 17:36:33,483 | INFO  | main | hello_world.plugin.PluginEntry |     | 
+=================== HELLO-WORLD PLUGIN END CONFIG ================
+
+16 Jul 2021 | 17:36:33,484 | INFO  | main | hello_world.plugin.PluginEntry |     | hello-world plugin: start
+16 Jul 2021 | 17:36:33,492 | DEBUG | main | tvd12.ezyfoxserver.EzyPluginsStarter |     | plugin: hello-world loaded
+16 Jul 2021 | 17:36:33,492 | INFO  | main | tvd12.ezyfoxserver.EzyZonesStarter |     | start all apps ...
+16 Jul 2021 | 17:36:33,493 | INFO  | main | tvd12.ezyfoxserver.EzyAppsStarter |     | start apps: [hello-world]
+16 Jul 2021 | 17:36:33,493 | DEBUG | main | tvd12.ezyfoxserver.EzyAppsStarter |     | app: hello-world loading...
+16 Jul 2021 | 17:36:33,493 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | loadClass(com.example.hello_world.AppEntryLoader)
+16 Jul 2021 | 17:36:33,494 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | findClass(com.example.hello_world.AppEntryLoader)
+16 Jul 2021 | 17:36:33,500 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | loadClass(com.tvd12.ezyfoxserver.ext.EzyAbstractAppEntryLoader)
+16 Jul 2021 | 17:36:33,502 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | loadClass(com.tvd12.ezyfox.reflect.EzyClasses)
+16 Jul 2021 | 17:36:33,506 | DEBUG | main | ezyfoxserver.ccl.EzyAppClassLoader |     | loadClass(com.tvd12.ezyfoxserver.ext.EzyAppEntry)
+16 Jul 2021 | 17:36:33,507 | INFO  | main | example.hello_world.AppEntry |     | 
+=================== HELLO-WORD APP START CONFIG ================
+
+16 Jul 2021 | 17:36:33,528 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | start scan class com.example.hello_world.request.ChatRequest
+16 Jul 2021 | 17:36:33,532 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | scan field who
+16 Jul 2021 | 17:36:33,533 | DEBUG | main | binding.impl.EzyObjectWriterElementsFetcher |     | finish scan class com.example.hello_world.request.ChatRequest
+16 Jul 2021 | 17:36:33,548 | DEBUG | main | binding.impl.EzyObjectWriterBuilder |     | class com.example.hello_world.request.ChatRequest$EzyObjectWriter$EzyAutoImpl$36 has generated
+16 Jul 2021 | 17:36:33,549 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.request.ChatRequest
+16 Jul 2021 | 17:36:33,550 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field who
+16 Jul 2021 | 17:36:33,550 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.request.ChatRequest
+16 Jul 2021 | 17:36:33,554 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.example.hello_world.request.ChatRequest$EzyObjectReader$EzyAutoImpl$33 has generated
+16 Jul 2021 | 17:36:33,555 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.request.ChatRequest
+16 Jul 2021 | 17:36:33,555 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field who
+16 Jul 2021 | 17:36:33,555 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.request.ChatRequest
+16 Jul 2021 | 17:36:33,563 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.example.hello_world.request.ChatRequest$EzyObjectUnwrapper$EzyAutoImpl$33 has generated
+16 Jul 2021 | 17:36:33,645 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.handler.GreetRequestHandler
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field who
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field greeting
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field user
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field session
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field appContext
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field responseFactory
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field logger
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | field logger has not getter/setter, ignore it
+16 Jul 2021 | 17:36:33,646 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.handler.GreetRequestHandler
+16 Jul 2021 | 17:36:33,650 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.example.hello_world.handler.GreetRequestHandler$EzyObjectReader$EzyAutoImpl$34 has generated
+16 Jul 2021 | 17:36:33,651 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.handler.GreetRequestHandler
+16 Jul 2021 | 17:36:33,652 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field who
+16 Jul 2021 | 17:36:33,652 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field greeting
+16 Jul 2021 | 17:36:33,652 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field user
+16 Jul 2021 | 17:36:33,723 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field session
+16 Jul 2021 | 17:36:33,723 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field appContext
+16 Jul 2021 | 17:36:33,723 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field responseFactory
+16 Jul 2021 | 17:36:33,724 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field logger
+16 Jul 2021 | 17:36:33,724 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | field logger has not getter/setter, ignore it
+16 Jul 2021 | 17:36:33,724 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.handler.GreetRequestHandler
+16 Jul 2021 | 17:36:33,738 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.example.hello_world.handler.GreetRequestHandler$EzyObjectUnwrapper$EzyAutoImpl$34 has generated
+16 Jul 2021 | 17:36:33,741 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.handler.BroacastMessageHandler
+16 Jul 2021 | 17:36:33,742 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:33,742 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field user
+16 Jul 2021 | 17:36:33,743 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field session
+16 Jul 2021 | 17:36:33,743 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field appContext
+16 Jul 2021 | 17:36:33,743 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field responseFactory
+16 Jul 2021 | 17:36:33,743 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field logger
+16 Jul 2021 | 17:36:33,743 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | field logger has not getter/setter, ignore it
+16 Jul 2021 | 17:36:33,743 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.handler.BroacastMessageHandler
+16 Jul 2021 | 17:36:33,749 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.example.hello_world.handler.BroacastMessageHandler$EzyObjectReader$EzyAutoImpl$35 has generated
+16 Jul 2021 | 17:36:33,751 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.handler.BroacastMessageHandler
+16 Jul 2021 | 17:36:33,753 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:33,753 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field user
+16 Jul 2021 | 17:36:33,780 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field session
+16 Jul 2021 | 17:36:33,781 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field appContext
+16 Jul 2021 | 17:36:33,781 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field responseFactory
+16 Jul 2021 | 17:36:33,781 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field logger
+16 Jul 2021 | 17:36:33,781 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | field logger has not getter/setter, ignore it
+16 Jul 2021 | 17:36:33,781 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.handler.BroacastMessageHandler
+16 Jul 2021 | 17:36:33,783 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.example.hello_world.handler.BroacastMessageHandler$EzyObjectUnwrapper$EzyAutoImpl$35 has generated
+16 Jul 2021 | 17:36:33,787 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.handler.UdpBroadcastMessageHandler
+16 Jul 2021 | 17:36:33,788 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:33,794 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field user
+16 Jul 2021 | 17:36:33,795 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field session
+16 Jul 2021 | 17:36:33,795 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field appContext
+16 Jul 2021 | 17:36:33,795 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field responseFactory
+16 Jul 2021 | 17:36:33,795 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field logger
+16 Jul 2021 | 17:36:33,795 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | field logger has not getter/setter, ignore it
+16 Jul 2021 | 17:36:33,836 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.handler.UdpBroadcastMessageHandler
+16 Jul 2021 | 17:36:33,856 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.example.hello_world.handler.UdpBroadcastMessageHandler$EzyObjectReader$EzyAutoImpl$36 has generated
+16 Jul 2021 | 17:36:33,858 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.handler.UdpBroadcastMessageHandler
+16 Jul 2021 | 17:36:33,859 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field message
+16 Jul 2021 | 17:36:33,859 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field user
+16 Jul 2021 | 17:36:33,859 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field session
+16 Jul 2021 | 17:36:33,859 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field appContext
+16 Jul 2021 | 17:36:33,859 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field responseFactory
+16 Jul 2021 | 17:36:33,859 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field logger
+16 Jul 2021 | 17:36:33,861 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | field logger has not getter/setter, ignore it
+16 Jul 2021 | 17:36:33,862 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.handler.UdpBroadcastMessageHandler
+16 Jul 2021 | 17:36:33,865 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.example.hello_world.handler.UdpBroadcastMessageHandler$EzyObjectUnwrapper$EzyAutoImpl$36 has generated
+16 Jul 2021 | 17:36:33,867 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.handler.UdpGreetRequestHandler
+16 Jul 2021 | 17:36:33,867 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field who
+16 Jul 2021 | 17:36:33,891 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field greeting
+16 Jul 2021 | 17:36:33,892 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field user
+16 Jul 2021 | 17:36:33,892 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field session
+16 Jul 2021 | 17:36:33,892 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field appContext
+16 Jul 2021 | 17:36:33,892 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field responseFactory
+16 Jul 2021 | 17:36:33,892 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field logger
+16 Jul 2021 | 17:36:33,892 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | field logger has not getter/setter, ignore it
+16 Jul 2021 | 17:36:33,892 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.handler.UdpGreetRequestHandler
+16 Jul 2021 | 17:36:33,905 | DEBUG | main | binding.impl.EzyObjectReaderBuilder |     | class com.example.hello_world.handler.UdpGreetRequestHandler$EzyObjectReader$EzyAutoImpl$37 has generated
+16 Jul 2021 | 17:36:33,910 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | start scan class com.example.hello_world.handler.UdpGreetRequestHandler
+16 Jul 2021 | 17:36:33,911 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field who
+16 Jul 2021 | 17:36:33,911 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field greeting
+16 Jul 2021 | 17:36:33,911 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field user
+16 Jul 2021 | 17:36:33,936 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field session
+16 Jul 2021 | 17:36:33,936 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field appContext
+16 Jul 2021 | 17:36:33,937 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field responseFactory
+16 Jul 2021 | 17:36:33,937 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | scan field logger
+16 Jul 2021 | 17:36:33,937 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | field logger has not getter/setter, ignore it
+16 Jul 2021 | 17:36:33,937 | DEBUG | main | binding.impl.EzyObjectReaderElementsFetcher |     | finish scan class com.example.hello_world.handler.UdpGreetRequestHandler
+16 Jul 2021 | 17:36:33,940 | DEBUG | main | binding.impl.EzyObjectUnwrapperBuilder |     | class com.example.hello_world.handler.UdpGreetRequestHandler$EzyObjectUnwrapper$EzyAutoImpl$37 has generated
+16 Jul 2021 | 17:36:33,979 | INFO  | main | example.hello_world.AppEntry |     | hello-word app config file: apps/entries/hello-world-entry/config/config.properties
+16 Jul 2021 | 17:36:34,120 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name greeting of class com.example.hello_world.common.Greeting, object = com.example.hello_world.common.Greeting@6df20ade
+16 Jul 2021 | 17:36:34,124 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name chatRequestController of class com.example.hello_world.handler.ChatRequestController, object = com.example.hello_world.handler.ChatRequestController@4fbb001b
+16 Jul 2021 | 17:36:34,125 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.example.hello_world.handler.ChatRequestController set field: greeting with value: com.example.hello_world.common.Greeting@6df20ade
+16 Jul 2021 | 17:36:34,125 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.example.hello_world.handler.ChatRequestController set field: responseFactory with value: com.tvd12.ezyfoxserver.support.factory.EzyAppResponseFactory@50b1f030
+16 Jul 2021 | 17:36:34,131 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | add singleton with name serverReadyController of class com.example.hello_world.controller.ServerReadyController, object = com.example.hello_world.controller.ServerReadyController@4010d494
+16 Jul 2021 | 17:36:34,132 | DEBUG | main | bean.impl.EzyByConstructorSingletonLoader |     | class com.example.hello_world.controller.ServerReadyController set field: appConfig with value: com.example.hello_world.config.AppConfig@1f9d6c7b
+16 Jul 2021 | 17:36:34,171 | DEBUG | main | bean.impl.EzyByConstructorPrototypeSupplierLoader |     | add prototype supplier of com.example.hello_world.handler.GreetRequestHandler$EzyPrototypeSupplier$EzyAutoImpl$1
+16 Jul 2021 | 17:36:34,189 | DEBUG | main | bean.impl.EzyByConstructorPrototypeSupplierLoader |     | add prototype supplier of com.example.hello_world.handler.BroacastMessageHandler$EzyPrototypeSupplier$EzyAutoImpl$2
+16 Jul 2021 | 17:36:34,196 | DEBUG | main | bean.impl.EzyByConstructorPrototypeSupplierLoader |     | add prototype supplier of com.example.hello_world.handler.UdpBroadcastMessageHandler$EzyPrototypeSupplier$EzyAutoImpl$3
+16 Jul 2021 | 17:36:34,210 | DEBUG | main | bean.impl.EzyByConstructorPrototypeSupplierLoader |     | add prototype supplier of com.example.hello_world.handler.UdpGreetRequestHandler$EzyPrototypeSupplier$EzyAutoImpl$4
+16 Jul 2021 | 17:36:34,211 | INFO  | main | example.hello_world.AppEntry |     | add  event SERVER_READY controller com.example.hello_world.controller.ServerReadyController@4010d494
+16 Jul 2021 | 17:36:34,212 | DEBUG | main | support.controller.EzyUserRequestAppPrototypeController$Builder |     | add command udpBroadcastMessage and request handler supplier com.example.hello_world.handler.UdpBroadcastMessageHandler$EzyPrototypeSupplier$EzyAutoImpl$3@2617f816
+16 Jul 2021 | 17:36:34,212 | DEBUG | main | support.controller.EzyUserRequestAppPrototypeController$Builder |     | add command broadcastMessage and request handler supplier com.example.hello_world.handler.BroacastMessageHandler$EzyPrototypeSupplier$EzyAutoImpl$2@757f675c
+16 Jul 2021 | 17:36:34,212 | DEBUG | main | support.controller.EzyUserRequestAppPrototypeController$Builder |     | add command greet and request handler supplier com.example.hello_world.handler.GreetRequestHandler$EzyPrototypeSupplier$EzyAutoImpl$1@27f3b6d6
+16 Jul 2021 | 17:36:34,212 | DEBUG | main | support.controller.EzyUserRequestAppPrototypeController$Builder |     | add command udpGreet and request handler supplier com.example.hello_world.handler.UdpGreetRequestHandler$EzyPrototypeSupplier$EzyAutoImpl$4@676f0a60
+16 Jul 2021 | 17:36:34,216 | DEBUG | main | support.controller.EzyUserRequestAppSingletonController$Builder |     | add command secureChat and request handler ChatRequestController$secureChat$Handler$AutoImpl$6@a53bb6f
+16 Jul 2021 | 17:36:34,217 | INFO  | main | example.hello_world.AppEntry |     | 
+=================== HELLO-WORD APP END CONFIG ================
+
+16 Jul 2021 | 17:36:34,217 | INFO  | main | example.hello_world.AppEntry |     | start hello-world app
+16 Jul 2021 | 17:36:34,217 | DEBUG | main | tvd12.ezyfoxserver.EzyAppsStarter |     | app: hello-world loaded
+16 Jul 2021 | 17:36:34,222 | DEBUG | main | wrapper.impl.EzyNioSessionManagerImpl |     | start session manager
+16 Jul 2021 | 17:36:34,246 | DEBUG | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | local bootstrap has started
+16 Jul 2021 | 17:36:34,248 | DEBUG | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | starting tcp socket server bootstrap ....
+16 Jul 2021 | 17:36:34,350 | DEBUG | ezyfox-socket-acceptor-15-1 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-socket-acceptor-15-1 event loop has started
+16 Jul 2021 | 17:36:34,351 | DEBUG | ezyfox-socket-reader-16-1 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-socket-reader-16-1 event loop has started
+16 Jul 2021 | 17:36:34,355 | DEBUG | ezyfox-socket-writer-17-1 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-socket-writer-17-1 event loop has started
+16 Jul 2021 | 17:36:34,358 | DEBUG | ezyfox-socket-writer-17-2 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-socket-writer-17-2 event loop has started
+16 Jul 2021 | 17:36:34,364 | DEBUG | ezyfox-socket-writer-17-3 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-socket-writer-17-3 event loop has started
+16 Jul 2021 | 17:36:34,366 | DEBUG | ezyfox-socket-writer-17-4 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-socket-writer-17-4 event loop has started
+16 Jul 2021 | 17:36:34,367 | DEBUG | ezyfox-socket-writer-17-5 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-socket-writer-17-5 event loop has started
+16 Jul 2021 | 17:36:34,378 | DEBUG | ezyfox-socket-writer-17-6 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-socket-writer-17-6 event loop has started
+16 Jul 2021 | 17:36:34,379 | DEBUG | ezyfox-socket-writer-17-7 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-socket-writer-17-7 event loop has started
+16 Jul 2021 | 17:36:34,380 | DEBUG | ezyfox-socket-writer-17-8 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-socket-writer-17-8 event loop has started
+16 Jul 2021 | 17:36:34,380 | DEBUG | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | tcp socket server bootstrap has started
+16 Jul 2021 | 17:36:34,381 | DEBUG | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | starting udp socket server bootstrap ....
+16 Jul 2021 | 17:36:34,413 | DEBUG | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | udp socket server bootstrap has started
+16 Jul 2021 | 17:36:34,413 | DEBUG | ezyfox-udp-reader-19-1 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-udp-reader-19-1 event loop has started
+16 Jul 2021 | 17:36:34,414 | DEBUG | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | starting websocket server bootstrap ....
+16 Jul 2021 | 17:36:34,521 | INFO  | main | jetty.util.log |     | Logging initialized @7420ms to org.eclipse.jetty.util.log.Slf4jLog
+16 Jul 2021 | 17:36:34,742 | INFO  | main | jetty.server.Server |     | jetty-9.4.40.v20210413; built: 2021-04-13T20:42:42.668Z; git: b881a572662e1943a14ae12e7e1207989f218b74; jvm 1.8.0_181-b13
+16 Jul 2021 | 17:36:34,897 | INFO  | main | server.handler.ContextHandler |     | Started o.e.j.s.h.ContextHandler@4a03bb68{/ws,null,AVAILABLE}
+16 Jul 2021 | 17:36:34,950 | INFO  | main | jetty.server.AbstractConnector |     | Started ServerConnector@4642b71d{HTTP/1.1, (http/1.1)}{0.0.0.0:2208}
+16 Jul 2021 | 17:36:34,954 | INFO  | main | jetty.server.Server |     | Started @7853ms
+16 Jul 2021 | 17:36:34,964 | DEBUG | ezyfox-web-socket-writer-20-1 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-web-socket-writer-20-1 event loop has started
+16 Jul 2021 | 17:36:34,964 | DEBUG | ezyfox-web-socket-writer-20-2 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-web-socket-writer-20-2 event loop has started
+16 Jul 2021 | 17:36:34,968 | DEBUG | ezyfox-web-socket-writer-20-4 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-web-socket-writer-20-4 event loop has started
+16 Jul 2021 | 17:36:34,969 | DEBUG | ezyfox-web-socket-writer-20-3 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-web-socket-writer-20-3 event loop has started
+16 Jul 2021 | 17:36:34,969 | DEBUG | ezyfox-web-socket-writer-20-8 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-web-socket-writer-20-8 event loop has started
+16 Jul 2021 | 17:36:34,969 | DEBUG | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | websockt server bootstrap has started
+16 Jul 2021 | 17:36:34,969 | DEBUG | ezyfox-web-socket-writer-20-7 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-web-socket-writer-20-7 event loop has started
+16 Jul 2021 | 17:36:34,969 | DEBUG | ezyfox-web-socket-writer-20-6 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-web-socket-writer-20-6 event loop has started
+16 Jul 2021 | 17:36:34,969 | DEBUG | ezyfox-web-socket-writer-20-5 | ezyfoxserver.socket.EzySocketEventLoopMultiHandler$1 |     | ezyfox-web-socket-writer-20-5 event loop has started
+16 Jul 2021 | 17:36:35,013 | DEBUG | ezyfox-system-request-handler-21-4 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-system-request-handler-21-4 event loop has started
+16 Jul 2021 | 17:36:35,001 | DEBUG | ezyfox-system-request-handler-21-3 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-system-request-handler-21-3 event loop has started
+16 Jul 2021 | 17:36:35,000 | DEBUG | ezyfox-system-request-handler-21-2 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-system-request-handler-21-2 event loop has started
+16 Jul 2021 | 17:36:34,992 | DEBUG | ezyfox-system-request-handler-21-1 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-system-request-handler-21-1 event loop has started
+16 Jul 2021 | 17:36:35,057 | DEBUG | ezyfox-extension-request-handler-22-4 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-extension-request-handler-22-4 event loop has started
+16 Jul 2021 | 17:36:35,059 | DEBUG | ezyfox-extension-request-handler-22-5 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-extension-request-handler-22-5 event loop has started
+16 Jul 2021 | 17:36:35,055 | DEBUG | ezyfox-extension-request-handler-22-3 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-extension-request-handler-22-3 event loop has started
+16 Jul 2021 | 17:36:35,052 | DEBUG | ezyfox-extension-request-handler-22-2 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-extension-request-handler-22-2 event loop has started
+16 Jul 2021 | 17:36:35,046 | DEBUG | ezyfox-extension-request-handler-22-1 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-extension-request-handler-22-1 event loop has started
+16 Jul 2021 | 17:36:35,020 | DEBUG | ezyfox-system-request-handler-21-8 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-system-request-handler-21-8 event loop has started
+16 Jul 2021 | 17:36:35,019 | DEBUG | ezyfox-system-request-handler-21-5 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-system-request-handler-21-5 event loop has started
+16 Jul 2021 | 17:36:35,018 | DEBUG | ezyfox-system-request-handler-21-7 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-system-request-handler-21-7 event loop has started
+16 Jul 2021 | 17:36:35,015 | DEBUG | ezyfox-system-request-handler-21-6 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-system-request-handler-21-6 event loop has started
+16 Jul 2021 | 17:36:35,080 | DEBUG | ezyfox-user-removal-handler-24-3 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-user-removal-handler-24-3 event loop has started
+16 Jul 2021 | 17:36:35,080 | DEBUG | ezyfox-user-removal-handler-24-2 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-user-removal-handler-24-2 event loop has started
+16 Jul 2021 | 17:36:35,079 | DEBUG | ezyfox-user-removal-handler-24-1 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-user-removal-handler-24-1 event loop has started
+16 Jul 2021 | 17:36:35,077 | DEBUG | ezyfox-disconnection-handler-23-2 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-disconnection-handler-23-2 event loop has started
+16 Jul 2021 | 17:36:35,077 | DEBUG | ezyfox-disconnection-handler-23-1 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-disconnection-handler-23-1 event loop has started
+16 Jul 2021 | 17:36:35,074 | DEBUG | ezyfox-extension-request-handler-22-8 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-extension-request-handler-22-8 event loop has started
+16 Jul 2021 | 17:36:35,073 | DEBUG | ezyfox-extension-request-handler-22-7 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-extension-request-handler-22-7 event loop has started
+16 Jul 2021 | 17:36:35,060 | DEBUG | ezyfox-extension-request-handler-22-6 | ezyfoxserver.socket.EzySocketEventLoopOneHandler$1 |     | ezyfox-extension-request-handler-22-6 event loop has started
+16 Jul 2021 | 17:36:35,095 | INFO  | main | ezyfoxserver.nio.EzyNioServerBootstrap |     | 
+
+  ______ ________     ________ ______   __           _____  ______          _______     __
+ |  ____|___  /\ \   / /  ____/ __ \ \ / /          |  __ \|  ____|   /\   |  __ \ \   / /
+ | |__     / /  \ \_/ /| |__ | |  | \ V /   ______  | |__) | |__     /  \  | |  | \ \_/ / 
+ |  __|   / /    \   / |  __|| |  | |> <   |______| |  _  /|  __|   / /\ \ | |  | |\   /  
+ | |____ / /__    | |  | |   | |__| / . \           | | \ \| |____ / ____ \| |__| | | |   
+ |______/_____|   |_|  |_|    \____/_/ \_\          |_|  \_\______/_/    \_\_____/  |_|   
+                                                                                          
+                                                                                          
+
+
+16 Jul 2021 | 17:36:35,098 | DEBUG | main | command.impl.EzyBroadcastEventImpl |     | broadcast server event: SERVER_READY
+16 Jul 2021 | 17:36:35,099 | DEBUG | main | command.impl.EzyZoneBroadcastEventImpl |     | zone: example fire event: SERVER_READY
+16 Jul 2021 | 17:36:35,101 | INFO  | main | plugin.controller.ServerReadyController |     | hello-world plugin: fire custom plugin ready, config: PluginConfig(environment=local, database=PluginConfig.DatabaseConfig(name=hello-world, host=localhost, port=27017))
+16 Jul 2021 | 17:36:35,102 | INFO  | main | hello_world.controller.ServerReadyController |     | hello-world app: fire custom app ready, node name: localhost
+16 Jul 2021 | 17:36:35,102 | DEBUG | main | command.impl.EzyZoneBroadcastEventImpl |     | zone: chat-tutorial fire event: SERVER_READY
